@@ -1,0 +1,503 @@
+/* ========== root ========== */
+:root {
+    --bg-start: #b0c0e5;
+    --bg-end: #11284f;
+    --card: #ffffff;
+    --accent: rgb(255, 179, 71);
+    --muted: #7b8aa3;
+    --background: rgba(255, 179, 71, 0.8);
+    --text: #001941;
+}
+
+/* ========== repetir ========== */
+ul,
+ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li a {
+    color: inherit;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+/* ========== body ========== */
+body {
+    background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+    color: var(--text);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px;
+}
+
+/* ========== header ========== */
+header {
+    position: sticky;
+    top: 0;
+    color: white;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    z-index: 10000;
+}
+
+header img {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+header img:hover {
+    transform: scale(12);
+    transition: transform 0.3s ease;
+}
+
+/* ========== nav ========== */
+.navPrincipal {
+    background-color: var(--background);
+    border-radius: 12px;
+    padding: 6px 12px;
+    position: relative;
+    z-index: 10001;
+}
+
+.navPrincipal ul {
+    display: flex;
+    gap: 20px;
+    padding: 6px 8px;
+    font-size: 15px;
+    color: #ffffff;
+    align-items: center;
+    margin: 0;
+}
+
+.navPrincipal ul li a {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    transition: background 0.18s, transform 0.12s;
+    color: white;
+    text-decoration: none;
+}
+
+.navPrincipal ul li a:hover {
+    background: rgba(255, 255, 255, 0.16);
+    transform: translateY(-2px);
+}
+
+/* ========== main ========== */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+}
+
+main a {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: var(--background);
+    transition: background 0.18s, transform 0.12s;
+    color: white;
+    text-decoration: none;
+}
+
+main a:hover {
+    background: rgb(251, 192, 109);
+    transform: translateY(-2px);
+}
+
+main>div:first-child {
+    flex: 1;
+}
+
+main>div:last-child {
+    flex-shrink: 0;
+}
+
+main img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+/* ========== Estilo repetitibo ========== */
+#about,
+.skills,
+.portfolio,
+.Languages,
+.Education,
+.Work-Experience,
+.Hobbies-Interests,
+#contact {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+}
+
+/* ========== About ========== */
+#about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#about img {
+    border-radius: 12px;
+    margin: 16px 0;
+}
+
+/* ========== Skills ========== */
+.skills .Skills-Header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.skills .Skills-Header h2 {
+    margin: 0;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(75, 95, 122, 0.1);
+    color: var(--text);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-align: center;
+}
+
+.skill-Box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    align-items: stretch;
+    padding: 8px 4px 4px 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.skill-Box a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    flex: 1;
+    min-width: 170px;
+    max-width: 260px;
+}
+
+.skill-Box .skill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 14px;
+    box-sizing: border-box;
+    background: rgba(75, 95, 122, 0.05);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    gap: 8px;
+    height: 100%;
+}
+
+.skill-Box .skill:hover {
+    background-color: rgba(75, 95, 122, 0.1);
+    transform: translateY(-2px);
+}
+
+.skill-Box .skill img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.skill-Box .skill {
+    font-weight: 700;
+}
+
+/* ========== Portfolio ========== */
+.portfolio {
+    width: 100%;
+    max-width: 1100px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+    box-sizing: border-box;
+}
+
+.portfolio h2 {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.project {
+    background: rgba(75, 95, 122, 0.05);
+    padding: 16px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.project:has(.video-container),
+.project:has(video) {
+    grid-column: 1 / -1;
+}
+
+.project img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.project video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.project>div:last-child {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 16px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    border-radius: 0 0 8px 8px;
+    z-index: 2;
+}
+
+.project:hover>div:last-child {
+    transform: translateY(0);
+}
+
+.View-More-Projects {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.View-More-Projects a {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--background);
+    color: white;
+    text-decoration: none;
+    transition: background 0.18s, transform 0.12s;
+}
+
+.View-More-Projects a:hover {
+    background: rgb(251, 192, 109);
+    transform: translateY(-2px);
+}
+
+/* Make portfolio responsive: 2 columns on tablets */
+@media (max-width: 900px) {
+    .portfolio {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Make portfolio responsive: 1 column on phones */
+@media (max-width: 600px) {
+    .portfolio {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========== languages ========== */
+.Languages div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.Languages article {
+    padding: 12px 16px;
+    background: rgba(75, 95, 122, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent);
+}
+
+/* ========== Other Sections ========== */
+.Work-Experience article,
+.Hobbies-Interests article,
+.Education article {
+    padding: 20px;
+    background: rgba(75, 95, 122, 0.05);
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+/* ========== Contact ========== */
+#contact {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+}
+
+.contact-Header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.contact-Header h2 {
+    margin: 0;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(75, 95, 122, 0.1);
+    color: var(--text);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-align: center;
+}
+
+.contact-Box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    align-items: stretch;
+    padding: 8px 4px 4px 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.contact-Box a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    flex: 1;
+    min-width: 200px;
+    max-width: 280px;
+}
+
+.contact-Box .contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 14px;
+    box-sizing: border-box;
+    background: rgba(75, 95, 122, 0.05);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    gap: 12px;
+    justify-content: center;
+    height: 140px;
+    width: 100%;
+}
+
+.contact-Box .contact-item:hover {
+    background-color: rgba(75, 95, 122, 0.1);
+    transform: translateY(-2px);
+}
+
+.contact-Box .contact-item img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    display: block;
+}
+
+.contact-Box .contact-item span {
+    font-weight: 700;
+    display: block;
+    width: 100%;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+/* CV下载链接的特殊样式（如果需要） */
+.cv-download {
+    /* 可以添加特殊样式，比如不同的颜色或图标动画 */
+}
+
+.cv-download .contact-item:hover {
+    background-color: rgba(255, 179, 71, 0.1); /* 使用强调色 */
+}
+
+/* ========== footer ========== */
+footer {
+    background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+    border-radius: 12px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+footer a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+}

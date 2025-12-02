@@ -1,0 +1,292 @@
+:root {
+    --bg-start: #b0c0e5;
+    --bg-end: #11284f;
+    --card: #ffffff;
+    --accent: rgb(255, 179, 71);
+    --muted: #7b8aa3;
+    --background: rgba(255, 179, 71, 0.8);
+    --text: #001941;
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+    color: var(--text);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    color: white;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+header img {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+/* ========== nav ========== */
+.navPrincipal {
+    background-color: var(--background);
+    border-radius: 12px;
+    padding: 6px 12px;
+}
+
+.navPrincipal ul {
+    display: flex;
+    gap: 20px;
+    padding: 6px 8px;
+    margin: 0;
+    list-style: none;
+}
+
+.navPrincipal ul li a {
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    transition: background 0.18s, transform 0.12s;
+    color: white;
+    text-decoration: none;
+}
+
+.navPrincipal ul li a:hover {
+    background: rgba(255, 255, 255, 0.16);
+    transform: translateY(-2px);
+}
+/* ========== main ========== */
+
+main {
+    padding: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+}
+
+main a {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: var(--background);
+    transition: background 0.18s, transform 0.12s;
+    color: white;
+    text-decoration: none;
+}
+
+main a:hover {
+    background: rgb(251, 192, 109);
+    transform: translateY(-2px);
+}
+
+main>div:first-child {
+    flex: 1;
+}
+
+main>div:last-child {
+    flex-shrink: 0;
+}
+
+main img {
+    border-radius: 12px;
+}
+
+
+#about,
+.skills,
+.portfolio,
+.Languages,
+.Education,
+.Work-Experience,
+.Hobbies-Interests,
+#contact {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+}
+
+/* ========== Skills ========== */
+.skills .Skills-Header,
+.contact-Header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.skills .Skills-Header h2,
+.contact-Header h2 {
+    margin: 0;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(75, 95, 122, 0.1);
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.skill-Box,
+.contact-Box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    padding: 8px 4px;
+}
+
+.skill-Box .skill,
+.contact-Box .contact-item {
+    min-width: 170px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 14px;
+    background: rgba(75, 95, 122, 0.05);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.skill-Box .skill:hover,
+.contact-Box .contact-item:hover {
+    background-color: rgba(75, 95, 122, 0.1);
+    transform: translateY(-2px);
+}
+
+.skill-Box img,
+.contact-Box img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
+
+/* ========== Portfolio ========== */
+.portfolio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.portfolio h2 {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+.project {
+    background: rgba(75, 95, 122, 0.05);
+    padding: 16px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.project:has(.video-container),
+.project:has(video) {
+    grid-column: 1 / -1;
+}
+
+.project img,
+.project video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.project>div:last-child {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 16px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    border-radius: 0 0 8px 8px;
+    z-index: 2;
+}
+
+.project:hover>div:last-child {
+    transform: translateY(0);
+}
+
+.View-More-Projects {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* ========== Languages ========== */
+.Languages div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.Languages article {
+    padding: 12px 16px;
+    background: rgba(75, 95, 122, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent);
+}
+
+.Work-Experience article,
+.Hobbies-Interests article,
+.Education article {
+    padding: 20px;
+    background: rgba(75, 95, 122, 0.05);
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+/* ========== Footer ========== */
+footer {
+    background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+    border-radius: 12px;
+}
+
+a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+li a {
+    color: inherit;
+}
