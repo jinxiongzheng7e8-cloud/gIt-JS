@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Index E2</title>
+    <script src="JS_Index_E2.js"></script>
+</head>
+
+<body>
+    <h1>JavaScript Index E2</h1>
+
+    <!-- 查找质数：最小化界面 -->
+    <label>起始: <input id="inicio" value="0" type="number" /></label>
+    <label>结束: <input id="fin" value="100" type="number" /></label>
+    <button onclick="encontrarPrimos()">Find Primes</button>
+    <div id="primesResult" style="margin-top:0.5rem;color:#333;"></div>
+
+    <!-- 猜数字：最小化交互 -->
+    <article>
+        <h2>Adivina el Número</h2>
+        <input id="guessInput" type="number" min="0" max="100" placeholder="0-100">
+        <button onclick="makeGuess()">Adivinar</button>
+        <div id="message">Intenta adivinar el número...</div>
+        <div id="attempts">Intentos: 0</div>
+    </article>
+</body>
+
+</html>
