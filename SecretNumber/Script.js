@@ -1,4 +1,3 @@
-
 let intentos; // número de intentos
 let num;
 
