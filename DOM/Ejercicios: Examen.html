@@ -9,14 +9,27 @@
 
 <body>
     <h1 id="titulo">Título original</h1>
-    <div id="Contenedor" style="background-color: lightgrey; border-radius: 10px; padding: 10px; margin-bottom: 10px;">
-        <h2>Contenedor de Artículos</h2>
-    </div>
+
 
     <p id="Texto ">Texto original</p>
     <img id="imagen" src="https://picsum.photos/300/300" alt="">
     <p id="description">description Ejercicio 2: Modificar Atributos</p>
     <h2 id="title">Hello, world</h2>
+
+    <div id="div1" style="background-color: lightgrey; border-radius: 10px; padding: 10px; margin-bottom: 10px;">
+        <h2>Contenedor de Artículos</h2>
+    </div>
+
+    <div id="Contenedor2"
+        style="background-color: rgb(188, 126, 126); border-radius: 10px; padding: 10px; margin-bottom: 10px;">
+        <h2>Ejercicio 4: Crear y Añadir Elementos</h2>
+    </div>
+
+    <article>
+        <h2>Ejercicio 5: Crear y Añadir Elementos con Bucle</h2>
+        <a href="#"></a>
+    </article>
+
     <script>
         document.getElementById("titulo").innerText = "Título actualizado";
 
@@ -35,11 +48,25 @@
             let newArticle = document.createElement("article");
             newArticle.innerHTML = "<h3>Nuevo Artículo</h3><p>Este es un nuevo artículo añadido mediante JavaScript.</p>";
             newArticle.style.marginTop = "10px";
-            document.getElementById("Contenedor").appendChild(newArticle);
+            document.getElementById("div1").appendChild(newArticle);
         }
 
+        let newElement = document.createElement("p");
+        newElement.innerHTML = "<p>Este es un párrafo añadido.</p>";
+        document.getElementById("Contenedor2").appendChild(newElement);
 
-        
+        let tecladoNumerico = document.querySelector("article a");
+        tecladoNumerico.innerText = "Teclado Numérico";
+        tecladoNumerico.href = "#";
+
+
+        let matrixTN = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9]
+        ];
+
+
     </script>
 </body>
 
