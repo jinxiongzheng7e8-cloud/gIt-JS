@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #divTeclado {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            width: 320px;
+            margin-top: 20px;
+        }
+
+        .Tecla {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            text-decoration: none;
+            color: #000;
+            font-size: 20px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Teclas numéricas</h1>
+    <div id="divTeclado">
+
+
+    </div>
+    <script>
+        let Teclado = document.getElementById("divTeclado");
+
+        for (let i = 1; i <= 99; i++) {
+            let Tecla = document.createElement("div");
+            Tecla.innerHTML = "<a>" + i + "</a>"
+            Tecla.className = "Tecla";
+
+            if (i % 2 === 0) {
+                Tecla.style.backgroundColor = "lightblue";
+            } else {
+                Tecla.style.backgroundColor = "lightgreen";
+            }
+
+            if (i % 3 == 0) {
+                Tecla.style.backgroundColor = "lightred";
+            }
+
+            Teclado.appendChild(Tecla);
+        }
+
+
+    </script>
+</body>
+
+</html>
