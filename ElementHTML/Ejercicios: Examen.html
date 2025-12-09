@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="titulo">Título original</h1>
+    <div id="Contenedor" style="background-color: lightgrey; border-radius: 10px; padding: 10px; margin-bottom: 10px;">
+        <h2>Contenedor de Artículos</h2>
+    </div>
+    
+    <p id="Texto ">Texto original</p>
+    <img id="imagen" src="https://picsum.photos/300/300" alt="">
+    <p id="description">description Ejercicio 2: Modificar Atributos</p>
+    <h2 id="title">Hello, world</h2>
+    <script>
+        document.getElementById("titulo").innerText = "Título actualizado";
+
+        // Cambiar el texto del elemento con id "Texto "
+        document.getElementById("Texto ").innerText = "Texto actualizado";
+
+        let imagen = document.getElementById("imagen");
+        imagen.src = "https://picsum.photos/400/400";
+        imagen.alt = "Imagen actualizada";
+
+        let titleH2 = document.getElementById("title");
+        titleH2.style.color = "red";
+        titleH2.style.fontSize = "32px";
+
+        for (let i = 0; i < 5; i++) {
+            let newArticle = document.createElement("article");
+            newArticle.innerHTML = "<h3>Nuevo Artículo</h3><p>Este es un nuevo artículo añadido mediante JavaScript.</p>";
+            newArticle.style.marginTop = "10px";
+            document.getElementById("Contenedor").appendChild(newArticle);
+        }
+
+
+        
+    </script>
+</body>
+
+</html>
