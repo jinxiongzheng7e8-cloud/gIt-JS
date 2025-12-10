@@ -7,7 +7,7 @@
     <style>
         #divTeclado {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             grid-gap: 10px;
             width: 320px;
             margin-top: 20px;
@@ -19,10 +19,13 @@
             align-items: center;
             width: 100px;
             height: 100px;
-            border: 1px solid #000;
+            border: 5px solid #000;
+            border-radius: 10px;
             text-decoration: none;
             color: #000;
             font-size: 20px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
         }
     </style>
     <title>Document</title>
@@ -30,10 +33,16 @@
 
 <body>
     <h1>Teclas numéricas</h1>
-    <div id="divTeclado">
-
-
+    <div id="">
+        <button> múltiplos de 5</button>
+        <button> múltiplos de 3</button>
+        <button> múltiplos de 3</button>
     </div>
+
+    <div id="divTeclado">
+    </div>
+
+
     <script>
         let Teclado = document.getElementById("divTeclado");
 
@@ -41,19 +50,50 @@
             let Tecla = document.createElement("div");
             Tecla.innerHTML = "<a>" + i + "</a>"
             Tecla.className = "Tecla";
+            //múltiplos de 2
 
-            if (i % 2 === 0) {
-                Tecla.style.backgroundColor = "lightblue";
-            } else {
-                Tecla.style.backgroundColor = "lightgreen";
-            }
-
-            if (i % 3 == 0) {
-                Tecla.style.backgroundColor = "lightred";
-            }
+            Tecla = aplicarColor(i, Tecla);
 
             Teclado.appendChild(Tecla);
+
         }
+
+        function aplicarColor(i, Tecla) {
+            if (i % 2 === 0) {
+                Tecla.style.backgroundColor = "lightblue";
+            }
+            //múltiplos de 3
+            if (i % 3 === 0) {
+                Tecla.style.backgroundColor = "lightgreen";
+            }
+            //múltiplos de 5
+            if (i % 5 === 0) {
+                Tecla.style.backgroundColor = "lightcoral";
+            }
+            //números primos
+            if (esPrimo(i)) {
+                Tecla.style.backgroundColor = "gold";
+            }
+            return Tecla;
+        }
+        
+        function esPrimo(num) {
+            if (num < 2) return false;
+
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        /*function esPrimo(num) {
+            if (num < 2) return false;
+            let limite = Math.sqrt(num);
+            for (let i = 2; i <= limite; i++) {
+                return false;
+            }
+            return true;
+        }*/
 
 
     </script>
