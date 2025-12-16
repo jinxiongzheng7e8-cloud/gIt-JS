@@ -5,13 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        #divTeclado {
+        #divTeclado,
+        #divTecladoNum {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             grid-gap: 10px;
             width: 320px;
             margin-top: 20px;
         }
+
+        #divTecladoText {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-gap: 10px;
+            width: 320px;
+            margin-top: 20px;
+            align-items: center;
+
+        }
+
+        .Alfanumérico {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            justify-content: space-between;
+            grid-gap: 10px;
+            width: 2000px;
+            margin-top: 20px;
+            column-gap: 50px;
+            align-items: center;
+        }
+
 
         .Tecla {
             display: flex;
@@ -26,6 +49,7 @@
             font-size: 20px;
             font-family: Arial, sans-serif;
             font-weight: bold;
+            cursor: pointer;
         }
     </style>
     <title>Document</title>
@@ -33,15 +57,12 @@
 
 <body>
     <h1>Teclas numéricas</h1>
-    <div id="">
-        <button> múltiplos de 5</button>
-        <button> múltiplos de 3</button>
-        <button> múltiplos de 3</button>
+    <div class="Alfanumérico">
+        <div id="divTecladoText"></div>
+        <div id="divTecladoNum"></div>
     </div>
 
-    <div id="divTeclado">
-    </div>
-
+    <div id="divTeclado"></div>
 
     <script>
         let Teclado = document.getElementById("divTeclado");
@@ -76,7 +97,7 @@
             }
             return Tecla;
         }
-        
+
         function esPrimo(num) {
             if (num < 2) return false;
 
@@ -95,7 +116,42 @@
             return true;
         }*/
 
+        let TecladoNum = document.getElementById("divTecladoNum");
 
+        for (let i = 0; i <= 9; i++) {
+            let TeclaNum = document.createElement("div");
+            TeclaNum.innerHTML = "<a>" + i + "</a>"
+            TeclaNum.className = "Tecla";
+            //múltiplos de 2
+
+            TeclaNum = aplicarColor(i, TeclaNum);
+
+            TecladoNum.appendChild(TeclaNum);
+        }
+
+        // 新增：生成字母键盘（A-Z），并区分元音颜色
+        let TecladoText = document.getElementById("divTecladoText");
+
+        for (let code = 65; code <= 90; code++) {
+            let letra = String.fromCharCode(code);
+            let TeclaLetra = document.createElement("div");
+            TeclaLetra.innerHTML = "<a>" + letra + "</a>";
+            TeclaLetra.className = "Tecla";
+
+            TeclaLetra = aplicarColorLetra(letra, TeclaLetra);
+
+            TecladoText.appendChild(TeclaLetra);
+        }
+
+        function aplicarColorLetra(letra, Tecla) {
+            const vocales = ['A', 'E', 'I', 'O', 'U'];
+            if (vocales.includes(letra)) {
+                Tecla.style.backgroundColor = "lightpink"; // 元音颜色
+            } else {
+                Tecla.style.backgroundColor = "lightyellow"; // 辅音颜色
+            }
+            return Tecla;
+        }
     </script>
 </body>
 
