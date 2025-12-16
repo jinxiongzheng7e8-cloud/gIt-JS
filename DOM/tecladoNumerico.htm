@@ -40,16 +40,52 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100px;
-            height: 100px;
-            border: 5px solid #000;
-            border-radius: 10px;
+            width: 60px;
+            height: 60px;
+            border: 2px solid #000;
+            border-radius: 5px;
             text-decoration: none;
             color: #000;
-            font-size: 20px;
+            font-size: 18px;
             font-family: Arial, sans-serif;
             font-weight: bold;
             cursor: pointer;
+            transition: all 0.1s ease;
+        }
+
+        .Tecla:hover {
+            transform: scale(1.05);
+        }
+
+        .Tecla:active {
+            transform: scale(0.95);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #MiTexto {
+            width: 300px;
+            height: 50px;
+            border: 2px solid #000;
+            margin-top: 20px;
+            font-size: 24px;
+            text-align: center;
+            line-height: 50px;
+            background-color: white;
+            border-radius: 10px;
+            align-items: center;
+        }
+
+        #buttonBorrar,
+        #buttonComprobar {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 10px;
         }
     </style>
     <title>Document</title>
@@ -57,7 +93,12 @@
 
 <body>
     <h1>Teclas numéricas</h1>
+    <div id="MiTexto"></div>
+    <button id="buttonBorrar" onclick="borrar()">Borrar</button>
+    <button id="buttonComprobar" onclick="comprobar()">Comprobar</button>
+
     <div class="Alfanumérico">
+
         <div id="divTecladoText"></div>
         <div id="divTecladoNum"></div>
     </div>
@@ -78,7 +119,7 @@
             Teclado.appendChild(Tecla);
 
         }
-
+        ////////////////////////////////////////////////////////////////////////
         function aplicarColor(i, Tecla) {
             if (i % 2 === 0) {
                 Tecla.style.backgroundColor = "lightblue";
@@ -98,6 +139,105 @@
             return Tecla;
         }
 
+
+        let TecladoNum = document.getElementById("divTecladoNum");
+
+        for (let i = 0; i <= 9; i++) {
+            let TeclaNum = document.createElement("div");
+            TeclaNum.innerHTML = "<a>" + i + "</a>"
+            TeclaNum.className = "Tecla";
+            //múltiplos de 2
+
+            TeclaNum = aplicarColor(i, TeclaNum);
+
+            TeclaNum.setAttribute("onclick", "escribir(" + i + ")");
+
+            TecladoNum.appendChild(TeclaNum);
+        }
+
+
+        function TecladoTextdo() {
+            // 新增：生成字母键盘（A-Z），并区分元音颜色
+            let TecladoText = document.getElementById("divTecladoText");
+
+            for (let I = 65; I <= 90; I++) {
+                let letra = String.fromCharCode(I);
+                let TeclaLetra = document.createElement("div");
+                TeclaLetra.innerHTML = "<a>" + letra + "</a>";
+                TeclaLetra.className = "Tecla";
+
+                TeclaLetra = aplicarColorLetra(letra, TeclaLetra);
+
+                TeclaLetra.setAttribute("onclick", "escribir('" + letra + "')");
+
+                TecladoText.appendChild(TeclaLetra);
+            }
+
+            palabraSecreta();
+        }
+
+        function aplicarColorLetra(letra, Tecla) {
+            const vocales = ['A', 'E', 'I', 'O', 'U'];
+            if (vocales.includes(letra)) {
+                Tecla.style.backgroundColor = "lightpink"; // 元音颜色
+            } else {
+                Tecla.style.backgroundColor = "lightyellow"; // 辅音颜色
+            }
+            return Tecla;
+        }
+
+        function escribir(valor) {
+            //console.log(valor);
+            let miTexto = document.getElementById("MiTexto");
+            console.log("miTexto:" + miTexto.textContent);
+            if (miTexto.textContent.length < 5) {
+                miTexto.textContent += valor;
+                console.log("miTexto después:" + miTexto.textContent);
+                miTexto.style.backgroundColor = "lightgray";
+            } else {
+                miTexto.style.backgroundColor = "red";
+                console.log("límite alcanzado");
+            }
+        }
+
+        function borrar() {
+            let miTexto = document.getElementById("MiTexto");
+
+            if (miTexto.textContent.length > 0) {
+                miTexto.textContent = miTexto.textContent.slice(0, -1);
+                miTexto.style.backgroundColor = "lightgray";
+            }
+        }
+
+        function comprobar() {
+            let miTexto = document.getElementById("MiTexto");
+            if (miTexto.textContent === palabra) {
+                miTexto.style.backgroundColor = "lightgreen";
+                alert("¡Correcto! La palabra es " + palabra);
+            } else {
+                miTexto.style.backgroundColor = "red";
+                alert("Incorrecto. Inténtalo de nuevo.");
+            }
+        }
+      
+        let palabra = "";
+        function palabraSecreta() {
+            fetch('https://random-word-api.herokuapp.com/word?lang=es&length=5')
+                .then(response => response.json())
+                .then(data => {
+                    palabra = data[0]; // La API devuelve un array, ej: ["perro"]
+
+                    palabra = palabra.toUpperCase();
+                    console.log("Tu palabra secreta es:", palabra);
+
+                });
+
+        }
+
+
+        TecladoTextdo();
+
+        /////////s///////////////////////////////////////////////////////////////    
         function esPrimo(num) {
             if (num < 2) return false;
 
@@ -116,42 +256,6 @@
             return true;
         }*/
 
-        let TecladoNum = document.getElementById("divTecladoNum");
-
-        for (let i = 0; i <= 9; i++) {
-            let TeclaNum = document.createElement("div");
-            TeclaNum.innerHTML = "<a>" + i + "</a>"
-            TeclaNum.className = "Tecla";
-            //múltiplos de 2
-
-            TeclaNum = aplicarColor(i, TeclaNum);
-
-            TecladoNum.appendChild(TeclaNum);
-        }
-
-        // 新增：生成字母键盘（A-Z），并区分元音颜色
-        let TecladoText = document.getElementById("divTecladoText");
-
-        for (let code = 65; code <= 90; code++) {
-            let letra = String.fromCharCode(code);
-            let TeclaLetra = document.createElement("div");
-            TeclaLetra.innerHTML = "<a>" + letra + "</a>";
-            TeclaLetra.className = "Tecla";
-
-            TeclaLetra = aplicarColorLetra(letra, TeclaLetra);
-
-            TecladoText.appendChild(TeclaLetra);
-        }
-
-        function aplicarColorLetra(letra, Tecla) {
-            const vocales = ['A', 'E', 'I', 'O', 'U'];
-            if (vocales.includes(letra)) {
-                Tecla.style.backgroundColor = "lightpink"; // 元音颜色
-            } else {
-                Tecla.style.backgroundColor = "lightyellow"; // 辅音颜色
-            }
-            return Tecla;
-        }
     </script>
 </body>
 
