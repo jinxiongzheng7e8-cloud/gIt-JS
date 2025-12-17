@@ -10,7 +10,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-gap: 10px;
-            width: 320px;
+            width: fit-content;
             margin-top: 20px;
         }
 
@@ -24,12 +24,12 @@
 
         }
 
-        .Alfanumérico {
+        .Alfanumerico {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             justify-content: space-between;
             grid-gap: 10px;
-            width: 2000px;
+            width: 1200px;
             margin-top: 20px;
             column-gap: 50px;
             align-items: center;
@@ -67,16 +67,31 @@
         }
 
         #MiTexto {
-            width: 300px;
-            height: 50px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-auto-rows: 40px;
+            gap: 8px;
+            width: fit-content;
+            padding: 8px;
             border: 2px solid #000;
-            margin-top: 20px;
-            font-size: 24px;
-            text-align: center;
-            line-height: 50px;
-            background-color: white;
             border-radius: 10px;
-            align-items: center;
+            background-color: white;
+        }
+
+        .char-input {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            border: 2px solid #333;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .char-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
         }
 
         #buttonBorrar,
@@ -88,17 +103,21 @@
             border-radius: 10px;
         }
     </style>
-    <script src="teclado.js"></script>
+    <!-- 使用同目录脚本并延迟执行 -->
+    <script src="teclado.js" defer></script>
     <title>Document</title>
 </head>
 
 <body>
     <h1>Teclas numéricas</h1>
+
     <div id="MiTexto"></div>
+
     <button id="buttonBorrar" onclick="borrar()">Borrar</button>
     <button id="buttonComprobar" onclick="comprobar()">Comprobar</button>
 
-    <div class="Alfanumérico">
+    <!-- 使用无重音的类名 -->
+    <div class="Alfanumerico">
 
         <div id="divTecladoText"></div>
         <div id="divTecladoNum"></div>
