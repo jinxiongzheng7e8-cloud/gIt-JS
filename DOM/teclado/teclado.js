@@ -91,86 +91,140 @@ function escribir(valor) {
     }
 }
 
-// 生成单字符输入框并绑定基本行为
-function createCharBoxes(n = 30) {
-    const c = document.getElementById('MiTexto');
-    c.innerHTML = '';
-    for (let i = 0; i < n; i++) {
-        const inp = document.createElement('input');
-        inp.type = 'text';
-        inp.maxLength = 1;
-        inp.className = 'char-input';
-        inp.dataset.i = i;
-        inp.addEventListener('input', e => {
-            e.target.value = (e.target.value || '').slice(-1).toUpperCase();
-            if (e.target.value && +e.target.dataset.i < n - 1) c.querySelector(`input[data-i="${+e.target.dataset.i + 1}"]`).focus();
-        });
-        inp.addEventListener('keydown', e => {
-            const idx = +e.target.dataset.i;
-            if (e.key === 'Backspace' && !e.target.value && idx > 0) {
-                const prev = c.querySelector(`input[data-i="${idx - 1}"]`);
-                prev.value = '';
-                prev.focus();
-                e.preventDefault();
-            } else if (e.key === 'ArrowLeft' && idx > 0) {
-                c.querySelector(`input[data-i="${idx - 1}"]`).focus();
-                e.preventDefault();
-            } else if (e.key === 'ArrowRight' && idx < n - 1) {
-                c.querySelector(`input[data-i="${idx + 1}"]`).focus();
-                e.preventDefault();
-            }
-        });
-        c.appendChild(inp);
-    }
-}
+// 替换为：全局变量与基于 cell-row-col 的 6x5 网格实现
+let palabra = "CASA"; // 默认，可被 palabraSecreta 覆盖
+let currentRow = 0;
+let currentCol = 0;
+const maxRows = 6;
+const maxCols = 5;
+let gameOver = false;
 
-// 通过按键写入到第一个空格
-function escribirChar(ch) {
-    const inputs = Array.from(document.querySelectorAll('#MiTexto input.char-input'));
-    const idx = inputs.findIndex(i => !i.value);
-    if (idx === -1) return;
-    inputs[idx].value = String(ch).slice(0, 1).toUpperCase();
-    if (idx < inputs.length - 1) inputs[idx + 1].focus();
-}
-
-// 简洁版：删除最后一个有值的格子
-function borrar() {
-    const inputs = Array.from(document.querySelectorAll('#MiTexto input.char-input'));
-    for (let i = inputs.length - 1; i >= 0; i--) {
-        if (inputs[i].value) {
-            inputs[i].value = '';
-            inputs[i].focus();
-            break;
+function createCharBoxes() {
+    const container = document.getElementById('MiTexto');
+    container.innerHTML = '';
+    // 清理内联样式（可由 CSS 控制）
+    for (let row = 0; row < maxRows; row++) {
+        for (let col = 0; col < maxCols; col++) {
+            const cell = document.createElement('div');
+            cell.className = 'game-cell';
+            cell.id = `cell-${row}-${col}`;
+            cell.dataset.row = row;
+            cell.dataset.col = col;
+            container.appendChild(cell);
         }
     }
 }
 
-// 简洁版：拼接输入并与 palabra 比较
-function comprobar() {
-    const texto = Array.from(document.querySelectorAll('#MiTexto input.char-input')).map(i => i.value || '').join('');
-    const cont = document.getElementById('MiTexto');
-    if (texto === palabra) {
-        cont.style.backgroundColor = 'lightgreen';
-        alert('¡Correcto! La palabra es ' + palabra);
-    } else {
-        cont.style.backgroundColor = 'red';
-        alert('Incorrecto. Inténtalo de nuevo.');
+// 写入函数：写到 currentRow 的第一个空格
+function escribirChar(ch) {
+    if (gameOver) return;
+    ch = String(ch || '').slice(0,1).toUpperCase();
+    if (!ch) return;
+    for (let col = 0; col < maxCols; col++) {
+        const cell = document.getElementById(`cell-${currentRow}-${col}`);
+        if (cell && cell.textContent === '') {
+            cell.textContent = ch;
+            return;
+        }
     }
 }
 
-let palabra = "";
+// 删除：删除当前行最后一个非空格
+function borrar() {
+    if (gameOver) return;
+    for (let col = maxCols - 1; col >= 0; col--) {
+        const cell = document.getElementById(`cell-${currentRow}-${col}`);
+        if (cell && cell.textContent !== '') {
+            cell.textContent = '';
+            cell.classList.remove('correct','present','absent');
+            return;
+        }
+    }
+}
+
+// 检查当前行（Wordle 风格）
+function comprobar() {
+    if (gameOver) return;
+    // 读取当前行文本
+    let guess = '';
+    const cells = [];
+    for (let col = 0; col < maxCols; col++) {
+        const cell = document.getElementById(`cell-${currentRow}-${col}`);
+        cells.push(cell);
+        guess += (cell.textContent || '');
+    }
+    if (guess.length < maxCols) {
+        alert('请先填满5个字母！');
+        return;
+    }
+    guess = guess.toUpperCase();
+    const secret = (palabra || '').toUpperCase();
+    // 统计 secret 字母计数
+    const counts = {};
+    for (let i = 0; i < maxCols; i++) {
+        const ch = secret[i] || '';
+        if (ch) counts[ch] = (counts[ch] || 0) + 1;
+    }
+    const result = new Array(maxCols).fill('absent');
+    // 第一遍标绿
+    for (let i = 0; i < maxCols; i++) {
+        const g = guess[i];
+        if (g && g === secret[i]) {
+            result[i] = 'correct';
+            counts[g]--;
+        }
+    }
+    // 第二遍标黄或灰
+    for (let i = 0; i < maxCols; i++) {
+        if (result[i] === 'correct') continue;
+        const g = guess[i];
+        if (g && counts[g] > 0) {
+            result[i] = 'present';
+            counts[g]--;
+        } else {
+            result[i] = 'absent';
+        }
+    }
+    // 应用样式
+    for (let i = 0; i < maxCols; i++) {
+        const cell = cells[i];
+        cell.classList.remove('correct','present','absent');
+        cell.classList.add(result[i]);
+    }
+    // 判断胜负
+    if (result.every(r => r === 'correct')) {
+        gameOver = true;
+        alert('¡Correcto! La palabra es ' + secret);
+        return;
+    }
+    currentRow++;
+    if (currentRow >= maxRows) {
+        gameOver = true;
+        alert('¡Game Over! La palabra era: ' + secret);
+    }
+}
+
+// 获取/设置秘密单词（保持 fetch 实现）
 function palabraSecreta() {
     fetch('https://random-word-api.herokuapp.com/word?lang=es&length=5')
         .then(response => response.json())
         .then(data => {
-            palabra = data[0]; // La API devuelve un array, ej: ["perro"]
-
-            palabra = palabra.toUpperCase();
+            palabra = (data[0] || palabra).toUpperCase();
             console.log("Tu palabra secreta es:", palabra);
-
-        });
-
+        })
+        .catch(() => { console.warn('无法获取随机单词，使用默认'); });
 }
+
+// 工具：获取单个格子（x=列, y=行，1-based）
+function getCell(x,y) {
+    return document.getElementById(`cell-${y-1}-${x-1}`);
+}
+
+// 初始化（替换原有 createCharBoxes(30) 调用）
+palabraSecreta();
+createCharBoxes();
+TecladoTextdo();
+TecladoNum();
 
 function esPrimo(num) {
     if (num < 2) return false;
@@ -180,8 +234,3 @@ function esPrimo(num) {
     }
     return true;
 }
-
-
-createCharBoxes(30);
-TecladoTextdo();
-TecladoNum();
