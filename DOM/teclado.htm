@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #divTeclado,
+        #divTecladoNum {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            width: 320px;
+            margin-top: 20px;
+        }
+
+        #divTecladoText {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-gap: 10px;
+            width: 320px;
+            margin-top: 20px;
+            align-items: center;
+
+        }
+
+        .Alfanumérico {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            justify-content: space-between;
+            grid-gap: 10px;
+            width: 2000px;
+            margin-top: 20px;
+            column-gap: 50px;
+            align-items: center;
+        }
+
+
+        .Tecla {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border: 2px solid #000;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.1s ease;
+        }
+
+        .Tecla:hover {
+            transform: scale(1.05);
+        }
+
+        .Tecla:active {
+            transform: scale(0.95);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #MiTexto {
+            width: 300px;
+            height: 50px;
+            border: 2px solid #000;
+            margin-top: 20px;
+            font-size: 24px;
+            text-align: center;
+            line-height: 50px;
+            background-color: white;
+            border-radius: 10px;
+            align-items: center;
+        }
+
+        #buttonBorrar,
+        #buttonComprobar {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+    </style>
+    <script src="teclado.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Teclas numéricas</h1>
+    <div id="MiTexto"></div>
+    <button id="buttonBorrar" onclick="borrar()">Borrar</button>
+    <button id="buttonComprobar" onclick="comprobar()">Comprobar</button>
+
+    <div class="Alfanumérico">
+
+        <div id="divTecladoText"></div>
+        <div id="divTecladoNum"></div>
+    </div>
+
+    <div id="divTeclado"></div>
+</body>
+
+</html>
