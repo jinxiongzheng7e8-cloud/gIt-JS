@@ -8,6 +8,29 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 新增：快速链接样式 -->
+    <style>
+        .quick-links {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0
+        }
+
+        .quick-links a {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: #e8f5ff;
+            color: #036;
+            text-decoration: none;
+            border: 1px solid #cfe8ff;
+            font-weight: 600
+        }
+
+        .quick-links a:hover {
+            background: #d8efff
+        }
+    </style>
 </head>
 
 <body>
@@ -18,6 +41,11 @@
             <p class="author-info">Código realizado por JinxiongZheng</p>
         </div>
     </header>
+
+    <!-- 新增：指向索引2的快速链接 -->
+    <div class="quick-links">
+        <a href="index2.html">Enlaces ejercicios</a>
+    </div>
 
     <main class="container">
         <div class="filters">
@@ -55,9 +83,6 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="https://apuntes-clase.itb" target="_blank" class="footer-link">
-                        <i class="fas fa-book"></i> Apuntes de clase
-                    </a>
                     <a href="https://github.com/tu-usuario/javascript-fundamentos" target="_blank" class="footer-link">
                         <i class="fab fa-github"></i> Ver en GitHub
                     </a>
@@ -89,9 +114,6 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="https://apuntes-clase.itb/juegos" target="_blank" class="footer-link">
-                        <i class="fas fa-book"></i> Apuntes de clase
-                    </a>
                     <a href="https://github.com/jinxiongzheng7e8-cloud/gIt-JS.git" target="_blank" class="footer-link">
                         <i class="fab fa-github"></i> Ver en GitHub
                     </a>
@@ -123,9 +145,6 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="https://apuntes-clase.itb/matematicas" target="_blank" class="footer-link">
-                        <i class="fas fa-book"></i> Apuntes de clase
-                    </a>
                     <a href="https://github.com/jinxiongzheng7e8-cloud/gIt-JS.git" target="_blank" class="footer-link">
                         <i class="fab fa-github"></i> Ver en GitHub
                     </a>
@@ -155,9 +174,6 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="https://apuntes-clase.itb/canvas" target="_blank" class="footer-link">
-                        <i class="fas fa-book"></i> Apuntes de clase
-                    </a>
                     <a href="https://github.com/jinxiongzheng7e8-cloud/gIt-JS.git" target="_blank" class="footer-link">
                         <i class="fab fa-github"></i> Ver en GitHub
                     </a>
@@ -186,9 +202,6 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="https://apuntes-clase.itb/proyecto-final" target="_blank" class="footer-link">
-                        <i class="fas fa-book"></i> Apuntes de clase
-                    </a>
                     <a href="https://github.com/jinxiongzheng7e8-cloud/gIt-JS.git" target="_blank" class="footer-link">
                         <i class="fab fa-github"></i> Ver en GitHub
                     </a>
@@ -231,7 +244,7 @@
     </footer>
 
     <!-- Incluir tus scripts existentes -->
-    <script src="js.js"></script>
+    <script src="script.js"></script>
 
     <!-- Script para filtrado de tarjetas -->
     <script>

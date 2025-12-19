@@ -1,18 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>enlaces a mis ejercicios</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enlaces a mis ejercicios</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f6f7fb;
+            margin: 0;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+
+        main {
+            width: 100%;
+            max-width: 760px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .06)
+        }
+
+        h1 {
+            margin-top: 0
+        }
+
+        nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 10px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #063;
+            background: #f0fff4;
+            border: 1px solid #d6f0df
+        }
+
+        nav a:hover {
+            background: #e6fff0
+        }
+
+        footer {
+            margin-top: 16px;
+            font-size: 13px;
+            color: #666
+        }
+    </style>
 </head>
+
 <body>
-  <h1>Aqui pondre todos los enlaces a mis ejercicios</h1>
-    <nav>
-        <a href="Números primos y números pares/index.htm">Números primos y números pares</a>
-        <a href="SecretNumber/index.htm">Jugar al Número secreto</a>
-        <a href="MiPortfolio/index.html">Mi PortFolio</a>
-        <a href="Practica Canvas/index.htm">Practica Canvas</a>
-    </nav>
+    <main>
+        <h1>Aquí pongo todos los enlaces a mis ejercicios</h1>
+        <p>Enlaces a las entradas según la estructura de carpetas del proyecto.</p>
+        <nav aria-label="enlaces ejercicios">
+            <a href="DOM/index.htm">DOM - Ejercicios (DOM/index.htm)</a>
+            <a href="Números primos y números pares/index.htm">Números primos y pares (Números primos y números
+                pares/index.htm)</a>
+            <a href="SecretNumber/index.htm">SecretNumber - Número secreto (SecretNumber/index.htm)</a>
+            <a href="MiPortfolio/index.html">MiPortfolio (MiPortfolio/index.html)</a>
+            <a href="Practica Canvas/index.htm">Practica Canvas (Practica Canvas/index.htm)</a>
+            <a href="Wordle/indexWordle.html">Wordle (Wordle/indexWordle.html)</a>
+        </nav>
+
+        <div style="margin-top:18px">
+            <a href="index.html" style="text-decoration:none;color:#036">Volver al índice principal (index.html)</a>
+        </div>
+
+        <footer>
+            <p>Nota: si algún enlace no funciona, verifica el nombre exacto de la carpeta o extensión (.htm / .html).
+            </p>
+        </footer>
+    </main>
 </body>
+
 </html>
