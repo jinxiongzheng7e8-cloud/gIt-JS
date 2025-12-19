@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --key-size: 56px;
+            --gap: 8px;
+            --border: 2px solid #000;
+            --cell-bg: #fff;
+            --cell-border: #ccc;
+            --font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 18px;
+            background: #f7f7f7;
+            margin: 0;
+        }
+
+        nav.top-nav {
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 12px;
+        }
+
+        nav.top-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 12px;
+        }
+
+        nav.top-nav a {
+            text-decoration: none;
+            color: #222;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            background: #fff;
+            border-color: #c1c1c1;
+        }
+
+        nav.top-nav a:hover {
+            background: #eee;
+            border-color: #ccc;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 8px 0 14px;
+        }
+
+        .Alfanumerico {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-top: 24px;
+
+            justify-content: center;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        #divTeclado,
+        #divTecladoNum,
+        #divTecladoText {
+            display: grid;
+            gap: 10px;
+        }
+
+        #divTeclado,
+        #divTecladoNum {
+            grid-template-columns: repeat(3, minmax(40px, 1fr));
+            width: fit-content;
+        }
+
+        #divTecladoText {
+            grid-template-columns: repeat(auto-fill, minmax(var(--key-size), 1fr));
+            width: 100%;
+            max-width: 520px;
+        }
+
+        .Tecla {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--key-size);
+            height: var(--key-size);
+            border-radius: 6px;
+            border: 1.8px solid #444;
+            font-weight: 700;
+            cursor: pointer;
+            user-select: none;
+            background: #fff;
+            transition: transform .08s ease, box-shadow .08s ease;
+        }
+
+        .Tecla:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .08);
+        }
+
+        .Tecla:active {
+            transform: translateY(0);
+        }
+
+        #MiTexto {
+            display: grid;
+            grid-template-columns: repeat(5, var(--key-size));
+            grid-template-rows: repeat(6, var(--key-size));
+            gap: var(--gap);
+            padding: 10px;
+            border-radius: 10px;
+            background: var(--cell-bg);
+            border: var(--border);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+        }
+
+        .game-cell {
+            width: var(--key-size);
+            height: var(--key-size);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            border-radius: 6px;
+            border: 2px solid var(--cell-border);
+            background: var(--cell-bg);
+            user-select: none;
+        }
+
+        .correct {
+            background: lightgreen !important;
+        }
+
+        .present {
+            background: lightgoldenrodyellow !important;
+        }
+
+        .absent {
+            background: lightcoral !important;
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 520px;
+            max-height: 48px;
+        }
+
+        #buttonBorrar,
+        #buttonComprobar {
+            min-width: 140px;
+            padding: 10px 18px;
+            font-size: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            background: #fff;
+            color: #222;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+            transition: transform .08s ease, box-shadow .12s ease, background .12s ease;
+        }
+
+        #buttonComprobar {
+            background: #1e90ff;
+            color: #fff;
+            border-color: #176ec2;
+        }
+
+        #buttonBorrar {
+            background: #fff;
+            color: #8b0000;
+            border-color: #f0cfcf;
+        }
+
+        #buttonBorrar:hover,
+        #buttonComprobar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+        }
+
+        #buttonBorrar:active,
+        #buttonComprobar:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        #buttonBorrar:disabled,
+        #buttonComprobar:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        @media (max-width: 600px) {
+            :root {
+                --key-size: 48px;
+            }
+
+            #divTeclado,
+            #divTecladoNum {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+    <script src="scriptWordle.js" defer></script>
+    <title>Wordle</title>
+</head>
+
+<body>
+    <!-- 新增导航 Home -->
+    <nav class="top-nav" aria-label="main navigation">
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+        </ul>
+    </nav>
+
+    <h1>Teclas Wordle</h1>
+
+    <div id="MiTexto"></div>
+
+    <!-- 按钮放入 .controls 容器 -->
+    <div class="controls">
+        <button id="buttonBorrar" onclick="borrar()">Borrar</button>
+        <button id="buttonComprobar" onclick="comprobar()">Comprobar</button>
+    </div>
+
+    <div class="Alfanumerico">
+
+        <div id="divTecladoText"></div>
+        <div id="divTecladoNum"></div>
+    </div>
+
+    <div id="divTeclado"></div>
+</body>
+
+</html>

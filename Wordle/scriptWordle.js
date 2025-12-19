@@ -49,22 +49,25 @@ for (let i = 0; i <= 9; i++) {
 
 
 function TecladoTextdo() {
-    // 新增：生成字母键盘（A-Z），并区分元音颜色
-    let TecladoText = document.getElementById("divTecladoText");
+    // 更简单、直观的字母键盘实现（A-Z）
+    const tecladoText = document.getElementById("divTecladoText");
+    if (!tecladoText) return;
+    tecladoText.innerHTML = ''; // 确保为空
+    for (let i = 65; i <= 90; i++) {
+        const letra = String.fromCharCode(i);
+        const tecla = document.createElement("div");
+        tecla.textContent = letra;
+        tecla.className = "Tecla";
 
-    for (let I = 65; I <= 90; I++) {
-        let letra = String.fromCharCode(I);
-        let TeclaLetra = document.createElement("div");
-        TeclaLetra.innerHTML = "<a>" + letra + "</a>";
-        TeclaLetra.className = "Tecla";
+        aplicarColorLetra(letra, tecla);
 
-        TeclaLetra = aplicarColorLetra(letra, TeclaLetra);
+        // 推荐用 addEventListener，比 setAttribute 更安全、易懂
+        tecla.addEventListener('click', function () {
+            escribirChar(letra);
+        });
 
-        TeclaLetra.setAttribute("onclick", "escribirChar('" + letra + "')");
-
-        TecladoText.appendChild(TeclaLetra);
+        tecladoText.appendChild(tecla);
     }
-    palabraSecreta();
 }
 
 function aplicarColorLetra(letra, Tecla) {
@@ -91,8 +94,7 @@ function escribir(valor) {
     }
 }
 
-// 替换为：全局变量与基于 cell-row-col 的 6x5 网格实现
-let palabra = "CASA"; // 默认，可被 palabraSecreta 覆盖
+let palabra = ""; 
 let currentRow = 0;
 let currentCol = 0;
 const maxRows = 6;
@@ -100,18 +102,20 @@ const maxCols = 5;
 let gameOver = false;
 
 function createCharBoxes() {
+    // 生成 6x5 网格
     const container = document.getElementById('MiTexto');
     container.innerHTML = '';
-    // 清理内联样式（可由 CSS 控制）
-    for (let row = 0; row < maxRows; row++) {
-        for (let col = 0; col < maxCols; col++) {
-            const cell = document.createElement('div');
-            cell.className = 'game-cell';
-            cell.id = `cell-${row}-${col}`;
-            cell.dataset.row = row;
-            cell.dataset.col = col;
-            container.appendChild(cell);
-        }
+    const total = maxRows * maxCols; // 6 * 5 = 30
+    for (let i = 0; i < total; i++) {
+        const row = Math.floor(i / maxCols);
+        const col = i % maxCols;
+        const cell = document.createElement('div');
+        cell.className = 'game-cell';
+        cell.id = `cell-${row}-${col}`;
+        cell.dataset.row = row;
+        cell.dataset.col = col;
+        cell.textContent = '';
+        container.appendChild(cell);
     }
 }
 
@@ -129,23 +133,40 @@ function escribirChar(ch) {
     }
 }
 
-// 删除：删除当前行最后一个非空格
 function borrar() {
     if (gameOver) return;
+    let deleted = false;
     for (let col = maxCols - 1; col >= 0; col--) {
         const cell = document.getElementById(`cell-${currentRow}-${col}`);
         if (cell && cell.textContent !== '') {
             cell.textContent = '';
             cell.classList.remove('correct','present','absent');
-            return;
+            deleted = true;
+            break;
+        }
+    }
+    if (!deleted && currentRow > 0) {
+        currentRow--;
+        for (let col = maxCols - 1; col >= 0; col--) {
+            const cell = document.getElementById(`cell-${currentRow}-${col}`);
+            if (cell && cell.textContent !== '') {
+                cell.textContent = '';
+                cell.classList.remove('correct','present','absent');
+                break;
+            }
         }
     }
 }
 
-// 检查当前行（Wordle 风格）
 function comprobar() {
     if (gameOver) return;
-    // 读取当前行文本
+
+    if (!palabra || palabra.length !== maxCols) {
+        alert('La palabra secreta no está disponible aún. Intentando obtener otra palabra...');
+        palabraSecreta();
+        return;
+    }
+
     let guess = '';
     const cells = [];
     for (let col = 0; col < maxCols; col++) {
@@ -154,9 +175,10 @@ function comprobar() {
         guess += (cell.textContent || '');
     }
     if (guess.length < maxCols) {
-        alert('请先填满5个字母！');
+        alert('¡Por favor, completa las 5 letras antes de comprobar!');
         return;
     }
+
     guess = guess.toUpperCase();
     const secret = (palabra || '').toUpperCase();
     // 统计 secret 字母计数
@@ -197,30 +219,65 @@ function comprobar() {
         alert('¡Correcto! La palabra es ' + secret);
         return;
     }
+    // 准备下一行：移动行索引并确保下一行格子为空且移除样式
     currentRow++;
     if (currentRow >= maxRows) {
         gameOver = true;
         alert('¡Game Over! La palabra era: ' + secret);
+        return;
+    }
+    // 清除下一行的残留内容/样式（以防意外）
+    for (let col = 0; col < maxCols; col++) {
+        const nextCell = document.getElementById(`cell-${currentRow}-${col}`);
+        if (nextCell) {
+            nextCell.textContent = '';
+            nextCell.classList.remove('correct','present','absent');
+        }
     }
 }
 
-// 获取/设置秘密单词（保持 fetch 实现）
-function palabraSecreta() {
-    fetch('https://random-word-api.herokuapp.com/word?lang=es&length=5')
-        .then(response => response.json())
-        .then(data => {
-            palabra = (data[0] || palabra).toUpperCase();
-            console.log("Tu palabra secreta es:", palabra);
-        })
-        .catch(() => { console.warn('无法获取随机单词，使用默认'); });
+// 新增：本地备用词与选择函数
+function pickFallbackWord() {
+    const fallback = ['CASAS','PERRO','GATOS','PLANO','SILLA','NIEVE','MUNDO','AMIGO','FUEGO','LLAVE'];
+    return fallback[Math.floor(Math.random() * fallback.length)];
 }
 
-// 工具：获取单个格子（x=列, y=行，1-based）
+function palabraSecreta() {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000); // 5s 超时
+    const url = 'https://random-word-api.herokuapp.com/word?number=1&length=5';
+
+    fetch(url, { signal: controller.signal })
+        .then(response => {
+            clearTimeout(timeout);
+            if (!response.ok) throw new Error('Respuesta no OK: ' + response.status);
+            return response.json();
+        })
+        .then(data => {
+            // La API 应该返回一个包含单词的数组
+            let w = '';
+            if (Array.isArray(data) && data.length > 0 && typeof data[0] === 'string') {
+                w = data[0].toUpperCase();
+            }
+            // 如果无效，则使用备用词
+            if (!w || w.length !== maxCols) {
+                w = pickFallbackWord();
+                console.warn('API devolvió palabra inválida, usando fallback:', w);
+            }
+            palabra = w;
+            console.log('Tu palabra secreta es:', palabra);
+        })
+        .catch(err => {
+            palabra = pickFallbackWord();
+            console.error('Error obteniendo palabra secreta, usando fallback:', err);
+            console.log('Palabra secreta (fallback):', palabra);
+        });
+}
+
 function getCell(x,y) {
     return document.getElementById(`cell-${y-1}-${x-1}`);
 }
 
-// 初始化（替换原有 createCharBoxes(30) 调用）
 palabraSecreta();
 createCharBoxes();
 TecladoTextdo();
@@ -234,3 +291,4 @@ function esPrimo(num) {
     }
     return true;
 }
+
