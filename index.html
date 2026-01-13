@@ -4,281 +4,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Exercises Portfolio</title>
+    <title>Portfolio JavaScript - Jinxiong Zheng</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- 新增：快速链接样式 -->
-    <style>
-        .quick-links {
-            display: flex;
-            justify-content: center;
-            margin: 10px 0
-        }
-
-        .quick-links a {
-            display: inline-block;
-            padding: 8px 12px;
-            border-radius: 6px;
-            background: #e8f5ff;
-            color: #036;
-            text-decoration: none;
-            border: 1px solid #cfe8ff;
-            font-weight: 600
-        }
-
-        .quick-links a:hover {
-            background: #d8efff
-        }
-    </style>
 </head>
 
 <body>
-    <header class="header">
-        <div class="container">
-            <h1 class="main-title">JavaScript</h1>
-            <h2 class="subtitle">M06 2A3D en el ITB con Alicia Vázquez</h2>
-            <p class="author-info">Código realizado por JinxiongZheng</p>
-        </div>
-    </header>
+    <div class="container">
+        <!-- 头部信息 -->
+        <header class="header">
+            <h1>JavaScript Portfolio</h1>
+            <div class="header-subtitle">
+                <p>M06 2A3D - ITB con Alicia Vázquez</p>
+                <p class="author">Código realizado por <strong>Jinxiong Zheng</strong></p>
+            </div>
+        </header>
 
-    <!-- 新增：指向索引2的快速链接 -->
-    <div class="quick-links">
-        <a href="index2.html">Enlaces ejercicios</a>
-    </div>
+        <!-- 快速链接 -->
+        <nav class="quick-nav">
+            <a href="index2.html" class="nav-link">
+                <i class="fas fa-external-link-alt"></i>
+                <span>Ver Ejercicios</span>
+            </a>
+        </nav>
 
-    <main class="container">
-        <div class="filters">
-            <button class="filter-btn active" data-filter="all">Todos</button>
-            <button class="filter-btn" data-filter="fundamentos">Fundamentos</button>
-            <button class="filter-btn" data-filter="dom">DOM Manipulation</button>
-            <button class="filter-btn" data-filter="juegos">Juegos</button>
-            <button class="filter-btn" data-filter="graficos">Gráficos</button>
-        </div>
-
-        <div class="cards-container">
-            <!-- Card 1: Fundamentos de JavaScript -->
-            <article class="card" data-category="fundamentos">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                        alt="Fundamentos JavaScript">
-                    <span class="card-tag">Bloque 1: Fundamentos</span>
+        <!-- 内容区域 -->
+        <main class="main-content">
+            <!-- 卡片1: Fundamentos -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-tag">Fundamentos</span>
+                    <h3 class="card-title">Conceptos Básicos</h3>
                 </div>
-                <div class="card-content">
-                    <h3 class="card-title">Fundamentos de JavaScript</h3>
-                    <h4 class="card-subtitle">Variables, bucles, funciones y estructuras básicas</h4>
+                <div class="card-body">
                     <p class="card-description">
-                        Ejercicios introductorios para comprender la sintaxis básica de JavaScript,
-                        incluyendo declaración de variables, estructuras de control, bucles y funciones.
+                        Ejercicios introductorios de JavaScript: variables, bucles, funciones y estructuras de control.
                     </p>
-                    <div class="exercises-list">
-                        <h5>Ejercicios realizados:</h5>
-                        <ul>
-                            <li><a href="javascript:void(0)" onclick="printOneToTen()">Imprimir números 1-10</a></li>
-                            <li><a href="javascript:void(0)" onclick="sumToN()">Suma 1 a N</a></li>
-                            <li><a href="javascript:void(0)" onclick="偶数()">Verificar número par</a></li>
-                            <li><a href="javascript:void(0)" onclick="三角形()">Dibujar triángulo</a></li>
-                            <li><a href="javascript:void(0)" onclick="圣诞树()">Dibujar árbol de Navidad</a></li>
+                    <div class="card-exercises">
+                        <h4>Ejercicios:</h4>
+                        <ul class="exercise-list">
+                            <li><a href="#" onclick="printOneToTen(); return false;">Números 1-10</a></li>
+                            <li><a href="#" onclick="sumToN(); return false;">Suma 1 a N</a></li>
+                            <li><a href="#" onclick="偶数(); return false;">Verificar Par</a></li>
+                            <li><a href="#" onclick="三角形(); return false;">Triángulo</a></li>
+                            <li><a href="#" onclick="圣诞树(); return false;">Árbol Navidad</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="https://github.com/tu-usuario/javascript-fundamentos" target="_blank" class="footer-link">
-                        <i class="fab fa-github"></i> Ver en GitHub
+                    <a href="https://github.com/jinxiongzheng7e8-cloud/gIt-JS" target="_blank">
+                        <i class="fab fa-github"></i> Ver Código
                     </a>
                 </div>
-            </article>
+            </div>
 
-            <!-- Card 2: Juegos con JavaScript -->
-            <article class="card" data-category="juegos">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                        alt="Juegos JavaScript">
-                    <span class="card-tag">Bloque 2: Juegos</span>
-                </div>
-                <div class="card-content">
+            <!-- 卡片2: Juegos -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-tag">Juegos</span>
                     <h3 class="card-title">Juegos Interactivos</h3>
-                    <h4 class="card-subtitle">Implementación de lógica de juego y DOM manipulation</h4>
+                </div>
+                <div class="card-body">
                     <p class="card-description">
-                        Desarrollo de juegos interactivos que utilizan JavaScript para la lógica del juego
-                        y manipulación del DOM para la interfaz de usuario.
+                        Desarrollo de juegos con JavaScript usando manipulación del DOM y lógica de juego.
                     </p>
-                    <div class="exercises-list">
-                        <h5>Juegos realizados:</h5>
-                        <ul>
-                            <li><a href="SecretNumber/index.htm">Adivina el número secreto (Prompt)</a></li>
-                            <li><a href="javascript:void(0)" onclick="initGuessDOM()">Adivina el número (DOM)</a></li>
-                            <li><a href="javascript:void(0)" onclick="alert('Próximamente: Código de cerradura')">Código
-                                    de cerradura</a></li>
+                    <div class="card-exercises">
+                        <h4>Juegos:</h4>
+                        <ul class="exercise-list">
+                            <li><a href="SecretNumber/index.htm">Adivina Número</a></li>
+                            <li><a href="#" onclick="initGuessDOM(); return false;">Adivina (DOM)</a></li>
+                            <li><a href="teclado.html" target="_blank">Juego de Teclado</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="https://github.com/jinxiongzheng7e8-cloud/gIt-JS.git" target="_blank" class="footer-link">
-                        <i class="fab fa-github"></i> Ver en GitHub
+                    <a href="https://github.com/jinxiongzheng7e8-cloud/gIt-JS" target="_blank">
+                        <i class="fab fa-github"></i> Ver Código
                     </a>
                 </div>
-            </article>
+            </div>
 
-            <!-- Card 3: Matemáticas y Algoritmos -->
-            <article class="card" data-category="fundamentos">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                        alt="Matemáticas JavaScript">
-                    <span class="card-tag">Bloque 3: Matemáticas</span>
-                </div>
-                <div class="card-content">
+            <!-- 卡片3: Matemáticas -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-tag">Matemáticas</span>
                     <h3 class="card-title">Algoritmos Matemáticos</h3>
-                    <h4 class="card-subtitle">Implementación de algoritmos numéricos y matemáticos</h4>
+                </div>
+                <div class="card-body">
                     <p class="card-description">
-                        Ejercicios que aplican JavaScript para resolver problemas matemáticos,
-                        incluyendo identificación de números primos, cálculos de secuencias y patrones.
+                        Implementación de algoritmos numéricos y cálculos matemáticos en JavaScript.
                     </p>
-                    <div class="exercises-list">
-                        <h5>Ejercicios realizados:</h5>
-                        <ul>
-                            <li><a href="Números primos y números pares/index.htm">Números primos y pares (HTML)</a>
-                            </li>
-                            <li><a href="javascript:void(0)" onclick="encontrarPrimos()">Encontrar primos (DOM)</a></li>
-                            <li><a href="javascript:void(0)" onclick="numerosPares()">Números pares 1-N</a></li>
+                    <div class="card-exercises">
+                        <h4>Ejercicios:</h4>
+                        <ul class="exercise-list">
+                            <li><a href="Números primos y números pares/index.htm">Primos y Pares</a></li>
+                            <li><a href="#" onclick="encontrarPrimos(); return false;">Buscar Primos</a></li>
+                            <li><a href="#" onclick="numerosPares(); return false;">Números Pares</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="https://github.com/jinxiongzheng7e8-cloud/gIt-JS.git" target="_blank" class="footer-link">
-                        <i class="fab fa-github"></i> Ver en GitHub
+                    <a href="https://github.com/jinxiongzheng7e8-cloud/gIt-JS" target="_blank">
+                        <i class="fab fa-github"></i> Ver Código
                     </a>
                 </div>
-            </article>
+            </div>
 
-            <!-- Card 4: Canvas y Gráficos -->
-            <article class="card" data-category="graficos">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                        alt="Canvas JavaScript">
-                    <span class="card-tag">Bloque 4: Gráficos</span>
+            <!-- 卡片4: Gráficos -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-tag">Gráficos</span>
+                    <h3 class="card-title">Canvas y Visualización</h3>
                 </div>
-                <div class="card-content">
-                    <h3 class="card-title">Canvas y Animaciones</h3>
-                    <h4 class="card-subtitle">Dibujo y animación con HTML5 Canvas</h4>
+                <div class="card-body">
                     <p class="card-description">
-                        Exploración de las capacidades gráficas de JavaScript mediante el uso
-                        del elemento Canvas para crear dibujos, animaciones y visualizaciones.
+                        Exploración de gráficos, animaciones y visualizaciones usando HTML5 Canvas.
                     </p>
-                    <div class="exercises-list">
-                        <h5>Prácticas realizadas:</h5>
-                        <ul>
+                    <div class="card-exercises">
+                        <h4>Prácticas:</h4>
+                        <ul class="exercise-list">
                             <li><a href="Practica Canvas/index.htm">Práctica Canvas</a></li>
                             <li><a href="MiPortfolio/index.html">Mi Portfolio</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="https://github.com/jinxiongzheng7e8-cloud/gIt-JS.git" target="_blank" class="footer-link">
-                        <i class="fab fa-github"></i> Ver en GitHub
+                    <a href="https://github.com/jinxiongzheng7e8-cloud/gIt-JS" target="_blank">
+                        <i class="fab fa-github"></i> Ver Código
                     </a>
                 </div>
-            </article>
+            </div>
+        </main>
 
-            <!-- Card 5: Portafolio Personal -->
-            <article class="card" data-category="dom">
-                <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                        alt="Portafolio">
-                    <span class="card-tag">Bloque 5: Proyecto Final</span>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">Portafolio Personal</h3>
-                    <h4 class="card-subtitle">Integración de conocimientos en un proyecto completo</h4>
-                    <p class="card-description">
-                        Proyecto integrador que combina diferentes técnicas y tecnologías
-                        aprendidas durante el curso para crear una aplicación web completa.
-                    </p>
-                    <div class="exercises-list">
-                        <h5>Proyectos realizados:</h5>
-                        <ul>
-                            <li><a href="MiPortfolio/index.html">Mi Portafolio Personal</a></li>
-                        </ul>
+        <!-- 页脚 -->
+        <footer class="footer" aria-label="pie de página">
+            <div class="container footer-grid">
+                <div class="contact-info">
+                    <h4>Contacto del Programador</h4>
+                    <p>Jinxiong Zheng</p>
+                    <p>Estudiante de Desarrollo Web - ITB</p>
+                    <div class="contact-links" aria-label="contact links">
+                        <a href="mailto:jinxiong.zheng@example.com" class="social-link" title="Email">
+                            <i class="fas fa-envelope" aria-hidden="true"></i><span class="sr-only">Email</span>
+                        </a>
+                        <a href="https://github.com/tu-usuario" target="_blank" class="social-link" title="GitHub">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="sr-only">GitHub</span>
+                        </a>
+                        <a href="https://linkedin.com/in/tu-usuario" target="_blank" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i><span class="sr-only">LinkedIn</span>
+                        </a>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <a href="https://github.com/jinxiongzheng7e8-cloud/gIt-JS.git" target="_blank" class="footer-link">
-                        <i class="fab fa-github"></i> Ver en GitHub
-                    </a>
-                </div>
-            </article>
-        </div>
-    </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="contact-info">
-                <h4>Contacto del Programador</h4>
-                <p>Jinxiong Zheng</p>
-                <p>Estudiante de Desarrollo Web - ITB</p>
-                <div class="contact-links">
-                    <a href="mailto:jinxiong.zheng@example.com">
-                        <i class="fas fa-envelope"></i> Email
-                    </a>
-                    <a href="https://github.com/tu-usuario" target="_blank">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <a href="https://linkedin.com/in/tu-usuario" target="_blank">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
+                <div class="license" aria-label="license">
+                    <p>
+                        <i class="fas fa-creative-commons" aria-hidden="true"></i>
+                        Este trabajo está licenciado bajo
+                        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+                            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+                        </a>.
+                    </p>
+                    <p class="copyright">
+                        &copy; <span id="year"></span> Jinxiong Zheng. Todos los derechos reservados.
+                    </p>
                 </div>
             </div>
-            <div class="license">
-                <p>
-                    <i class="fas fa-creative-commons"></i>
-                    Este trabajo está licenciado bajo
-                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
-                        Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
-                    </a>.
-                </p>
-                <p class="copyright">
-                    &copy; 2023 Jinxiong Zheng. Todos los derechos reservados.
-                </p>
-            </div>
-        </div>
-    </footer>
+        </footer>
 
-    <!-- Incluir tus scripts existentes -->
-    <script src="script.js"></script>
-
-    <!-- Script para filtrado de tarjetas -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const cards = document.querySelectorAll('.card');
-
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    // Remover clase activa de todos los botones
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-
-                    // Agregar clase activa al botón clickeado
-                    this.classList.add('active');
-
-                    const filter = this.getAttribute('data-filter');
-
-                    // Mostrar/ocultar tarjetas según el filtro
-                    cards.forEach(card => {
-                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                });
+        <script>
+            // 设置 footer 年份
+            document.addEventListener('DOMContentLoaded', function () {
+                const y = new Date().getFullYear();
+                const el = document.getElementById('year');
+                if (el) el.textContent = y;
             });
+        </script>
+    </div>
 
-            // Inicializar algunos de tus funciones para que estén disponibles
-            if (typeof initGuessDOM !== 'undefined') {
-                initGuessDOM();
-            }
-        });
-    </script>
+    <!-- JavaScript文件 -->
 </body>
 
 </html>
