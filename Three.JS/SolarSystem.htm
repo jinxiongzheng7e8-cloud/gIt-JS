@@ -207,11 +207,11 @@
     scene.add(sunLight);
 
     // 环境光 - 基于物理的全局照明
-    const ambientLight = new THREE.AmbientLight(0x333333, 0.1);
+    const ambientLight = new THREE.AmbientLight(0x333333, 0.2);
     scene.add(ambientLight);
 
     // 填充光 - 减少对比度过强
-    const fillLight = new THREE.DirectionalLight(0x6699ff, 0.1);
+    const fillLight = new THREE.DirectionalLight(0x6699ff, 0.2);
     fillLight.position.set(-1, 0.5, -1);
     fillLight.castShadow = false;
     scene.add(fillLight);
